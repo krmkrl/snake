@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>Snake</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel='stylesheet' media='screen and (max-width: 1200px)' href='stylesMobile.css' />
+</head>
+
+<body>
+    <div id="container">
+
+        <div id="gameArea">
+            <div id="scoreContainer">
+                <div>score:&nbsp;</div>
+                <div id="score">0</div>
+            </div>
+            <canvas id="snakeCanvas" width="400" height="400"></canvas>
+        </div>
+
+        <div id="arrows">
+            <img src="arrows.png" alt="Arrow keys" width="300" height="200" usemap="#imageKeyMap">
+
+            <map name="imageKeyMap">
+                <area class="imageKeyUp" shape="rect" coords="100,0,200,100" href="">
+                <area class="imageKeyDown" shape="rect" coords="100,100,200,200" href="">
+                <area class="imageKeyLeft" shape="rect" coords="0,100,100,200" href="">
+                <area class="imageKeyRight" shape="rect" coords="200,100,300,200" href="">
+            </map>
+        </div>
+
+        <div id="highScores">
+        </div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="config.js"></script>
+    <script src="highscore.js"></script>
+    <script src="snake.js"></script>
+    <script src="food.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

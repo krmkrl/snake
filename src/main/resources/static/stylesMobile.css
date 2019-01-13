@@ -1,0 +1,29 @@
+@import 'styles.css';
+
+#container {
+    text-align: center;
+}
+
+#gameArea {
+    position: static;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    transform: none;
+}
+
+#arrows {
+    position: static;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#highScores {
+    position: static;
+    display: inline-block;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
