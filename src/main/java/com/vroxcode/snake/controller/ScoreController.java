@@ -34,12 +34,9 @@ public class ScoreController {
         if (numSavedScores < MAX_NUM_SCORES) {
             scoreRepository.save(score);
         } else {
-            boolean isHighscore = savedScores.stream().anyMatch(savedScore -> score.getScore() > savedScore.getScore());
-
-            if (isHighscore) {
+            Score lastScore = savedScores.get(numSavedScores - 1);
+            if (score.getScore() > lastScore.getScore()) {
                 scoreRepository.save(score);
-
-                Score lastScore = savedScores.get(savedScores.size() - 1);
                 scoreRepository.delete(lastScore);
             }
         }
