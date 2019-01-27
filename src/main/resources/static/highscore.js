@@ -1,9 +1,9 @@
-const SCORES_FILE = "saved_scores.json";
-
 let highScores;
 
+const NUM_SCORES = 10;
+
 function getHighScores() {
-    return fetch(SCORES_FILE, {
+    return fetch("/scores", {
     })
     .then(handleErrors)
     .then((response) => {
@@ -26,10 +26,9 @@ function populateHighScoreTable() {
     let scoresTable = "<table>";
     scoresTable += "<tr><th>Name</th><th>Score</th></tr>";
 
-    let highScoreList = highScores["scores"];
-    for (let i = 0; i < highScoreList.length; i++) {
+    for (let i = 0; i < highScores.length; i++) {
         scoresTable += "<tr>";
-        let scoreElem = highScoreList[i];
+        let scoreElem = highScores[i];
         let name = scoreElem["name"];
         let score = scoreElem["score"];
         scoresTable += "<td>" + name + "</td>";
@@ -42,9 +41,14 @@ function populateHighScoreTable() {
 }
 
 function isScoreInHighScores(score) {
-    let highScoreList = highScores["scores"];
-    for (let i = 0; i < highScoreList.length; i++) {
-        let scoreElem = highScoreList[i];
+    if (score == 0) {
+        return false;
+    }
+    if (highScores.length < NUM_SCORES) {
+        return true;
+    }
+    for (let i = 0; i < highScores.length; i++) {
+        let scoreElem = highScores[i];
         let highScore = scoreElem["score"];
         if (score > highScore) {
             return true;
@@ -65,25 +69,26 @@ function askForName() {
 }
 
 function insertNewHighScore(name, score) {
-    let highScoreList = highScores["scores"];
-    let insertIndex = highScoreList.length - 1;
-    for (let i = 0; i < highScoreList.length; i++) {
-        let scoreElem = highScoreList[i];
+    let insertIndex = highScores.length;
+    for (let i = 0; i < highScores.length; i++) {
+        let scoreElem = highScores[i];
         if (score > scoreElem["score"]) {
             insertIndex = i;
             break;
         }
     }
     // insert name and score at the correct position
-    highScoreList.splice(insertIndex, 0, {name:name, score:score});
-    // remove the last score
-    highScoreList.splice(highScoreList.length - 1, 1);
+    highScores.splice(insertIndex, 0, {name:name, score:score});
+    if (highScores.length > NUM_SCORES) {
+        // remove the last score
+        highScores.splice(highScores.length - 1, 1);
+    }
 }
 
 function sendNewHighScore(name, score) {
     let newScore = {"name":name, "score":score};
-    return fetch("new_highscore", {
-        method: 'PUT',
+    return fetch("/score", {
+        method: 'POST',
         body: JSON.stringify(newScore),
         headers: {
             'Content-Type': 'application/json'
