@@ -1,1 +1,13 @@
 image: java:10
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: ./gradlew bootJar
+
+test:
+  stage: test
+  script: ./gradlew test
