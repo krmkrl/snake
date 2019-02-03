@@ -22,6 +22,11 @@ public class ScoreController {
     @Autowired
     private ScoreRepository scoreRepository;
 
+    @GetMapping("/scores")
+    public List<Score> scores() {
+        return scoreRepository.findAll(Sort.by(Sort.Direction.DESC, SORT_PROPERTY));
+    }
+
     @PostMapping("/score")
     @ResponseBody
     public ResponseEntity newScore(@RequestBody Score score) {
@@ -29,6 +34,11 @@ public class ScoreController {
             LOG.warn("Invalid score: " + score);
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
+        saveScore(score);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    private void saveScore(Score score) {
         List<Score> savedScores = scoreRepository.findAll(Sort.by(Sort.Direction.DESC, SORT_PROPERTY));
         int numSavedScores = savedScores.size();
         if (numSavedScores < MAX_NUM_SCORES) {
@@ -40,12 +50,6 @@ public class ScoreController {
                 scoreRepository.delete(lastScore);
             }
         }
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @GetMapping("/scores")
-    public List<Score> scores() {
-        return scoreRepository.findAll(Sort.by(Sort.Direction.DESC, SORT_PROPERTY));
     }
 
     private boolean isValid(Score score) {
