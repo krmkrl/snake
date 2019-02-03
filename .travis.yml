@@ -1,4 +1,9 @@
 language: java
 
-jdk:
-  - openjdk11
+jdk: openjdk11
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: TBE4VhQKwS68pxyLkqKZFDt65A9jSFmA7JCTZYzDrilt8ezaZmTsMvgio0SXL/BRlBZWnodlpcLYglUZD1MKN0WjoUvapwDDMC3XK162HNmHb0ODX0muHdUOdZWoTUoj15+2DnJGULwUTHZonHqepK7eaMPiPguDm9SiLb3laSTv2tYmRmaDrUJ/r9LXL6NiddcfbjkHnex1mNMb0uty3+y0YIa1O0H6ae0wj99JQ+2T3CjMjolSh4IgrKtvD9WpLRUWOoEBWPI9J+SsLZ7ruOH16EhxjavY0PVUDx2+E71u3dterT1lI0yF0JFIw29RfWPV7P6OZbv1FYPKQj5/Yg97mef08/KR5DHrts1x1qFK2jgCupZwcy8RMx06ARC1cG86pEF542IiBMHnSsJbscX9OFDrSF/ImICUO8zmqQGgk7xfUxGEu3ITgkqGqajHYGnohRzLOGPhTnRyWYAAkBftccLog2D/CZ+hjbkQTDfHaj6Bx++iqKW8Ich0UWkeslWSoE/iOoa3eZOm6bMW4LpBMC/+VIIxWW97+0B56R7IfBqKQnx3JHszllsryyEf++x+IRzC5bygMxooGjRGhBngiPID/jkAm79u6fspgUOoLiD8tUKb0rGK0Ylqw2Gp8tR54F/KsNP47q/NnISndpjvicWGqfDDm2WvczBaWN0=
+  app: snake-heroku
